@@ -21,30 +21,42 @@
                     </ul>
                 </div>
                 @endif
-                <form method="post" action="{{ route('mahasiswas.store') }}" id="myFo
-rm">
+                <form method="post" action="{{ route('mahasiswas.store') }}" id="myForm">
                     @csrf
                     <div class="form-group">
                         <label for="Nim">Nim</label>
-                        <input type="text" name="Nim" class="formcontrol" id="Nim" aria-describedby="Nim">
+                        <input type="text" name="nim" class="formcontrol" id="Nim" aria-describedby="Nim">
                     </div>
                     <div class="form-group">
                         <label for="Nama">Nama</label>
-                        <input type="Nama" name="Nama" class="formcontrol" id="Nama" aria-describedby="Nama">
+                        <input type="Nama" name="nama" class="formcontrol" id="Nama" aria-describedby="Nama">
                     </div>
                     <div class="form-group">
-                        <label for="Kelas">Kelas</label> <input type="Kelas" name="Kelas" class="formcontrol" id="Kelas" aria-describedby="password">
+                        <label for="Kelas">Kelas</label>
+                        <select class="form-control">@foreach($kelas as $kls)
+                            <option value="{{$kls->id}}">{{$kls->nama_kelas}}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="Jurusan">Jurusan</label>
-                        <input type="Jurusan" name="Jurusan" class="formcontrol" id="Jurusan" aria-describedby="Jurusan">
+                        <input type="Jurusan" name="jurusan" class="formcontrol" id="Jurusan"
+                            aria-describedby="Jurusan">
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="No_Handphone">No_Handphone</label>
 
-                        <input type="No_Handphone" name="No_Handphone" class="formcontrol" id="No_Handphone" aria-describedby="No_Handphone">
+                        <input type="No_Handphone" name="no_handphone" class="formcontrol" id="No_Handphone" aria-describedby="No_Handphone">
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <div class="form-group">
+                        <label for="Email">Email</label>
+                        <input type="text" name="email" class="formcontrol" id="email" aria-describedby="Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="Ttl">TTL</label>
+                        <input type="date" name="ttl" class="formcontrol" id="ttl" aria-describedby="Ttl">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button> -->
                 </form>
             </div>
         </div>
