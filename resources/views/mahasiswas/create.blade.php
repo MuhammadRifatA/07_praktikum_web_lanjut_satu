@@ -21,7 +21,7 @@
                     </ul>
                 </div>
                 @endif
-                <form method="post" action="{{ route('mahasiswas.store') }}" id="myForm">
+                <form method="post" action="{{ route('mahasiswas.store') }}" id="myForm" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label for="Nim">Nim</label>
@@ -32,18 +32,21 @@
                         <input type="Nama" name="nama" class="formcontrol" id="Nama" aria-describedby="Nama">
                     </div>
                     <div class="form-group">
+                        <label for="foto">Foto</label>
+                        <input type="file" name="foto" class="form-control" id="foto" aria-describedby="foto" accept="image/*">
+                    </div>
+                    <div class="form-group">
                         <label for="Kelas">Kelas</label>
-                        <select class="form-control">@foreach($kelas as $kls)
+                        <select class="form-control" name="kelas">@foreach($kelas as $kls)
                             <option value="{{$kls->id}}">{{$kls->nama_kelas}}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="Jurusan">Jurusan</label>
-                        <input type="Jurusan" name="jurusan" class="formcontrol" id="Jurusan"
-                            aria-describedby="Jurusan">
+                        <input type="Jurusan" name="jurusan" class="formcontrol" id="Jurusan" aria-describedby="Jurusan">
                     </div>
-                    <!-- <div class="form-group">
+                    <div class="form-group">
                         <label for="No_Handphone">No_Handphone</label>
 
                         <input type="No_Handphone" name="no_handphone" class="formcontrol" id="No_Handphone" aria-describedby="No_Handphone">
@@ -56,7 +59,7 @@
                         <label for="Ttl">TTL</label>
                         <input type="date" name="ttl" class="formcontrol" id="ttl" aria-describedby="Ttl">
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button> -->
+                    <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
         </div>

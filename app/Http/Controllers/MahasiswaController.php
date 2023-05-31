@@ -36,26 +36,35 @@ class MahasiswaController extends Controller
      */
     public function store(Request $request)
     {
+
         $validate = $request->validate([
             'nim' => 'required',
             'nama' => 'required',
             'kelas' => 'required',
             'jurusan' => 'required',
-            // 'no_handphone' => 'required',
-            // 'email' => 'required',
-            // 'ttl' => 'required',
         ]);
 
+        if ($request->file('foto')) {
+            $nama_foto = $request->file('foto')->store('fotoMahasiswa', 'public');
+        } else {
+            dd('Foto Tidak ada');
+        }
+
         $Mahasiswa = new Mahasiswa;
-        $Mahasiswa->nim = $request->get('Nim');
-        $Mahasiswa->nama = $request->get('Nama');
-        $Mahasiswa->jurusan = $request->get('Jurusan');
+        $Mahasiswa->nim = $request->get('nim');
+        $Mahasiswa->nama = $request->get('nama');
+        $Mahasiswa->kelas_id = $request->get('kelas');
+        $Mahasiswa->foto = $nama_foto;
+        $Mahasiswa->jurusan = $request->get('jurusan');
+        $Mahasiswa->no_handphone = $request->get('no_handphone');
+        $Mahasiswa->email = $request->get('email');
+        $Mahasiswa->ttl = $request->get('ttl');
         $Mahasiswa->save();
 
-        $Kelas = new Kelas;
-        $Kelas->id = $request->get('Kelas');
+        // $Kelas = new Kelas;
+        // $Kelas->id = $request->get('Kelas');
 
-        $Mahasiswa->kelas()->associate($Kelas);
+        // $Mahasiswa->kelas()->associate($Kelas);
         $Mahasiswa->save();
 
         return redirect()->route('mahasiswas.index')
@@ -118,5 +127,16 @@ class MahasiswaController extends Controller
         $data = $request->search;
         $mahasiswas = Mahasiswa::where('nama', 'like', '%' . $data . '%')->paginate(6);
         return view('mahasiswas.index', compact('mahasiswas'));
+    }
+
+    public function khs(Mahasiswa $mahasiswa)
+    {
+        $matkuls = $mahasiswa->matakuliah;
+
+
+        return view('mahasiswas.khs', [
+            'matkuls' => $matkuls,
+            'mahasiswa' => $mahasiswa
+        ]);
     }
 }
